@@ -1,0 +1,17 @@
+name,price,solds,max,min,tendency
+Sports_Cola,10,0,300,150,Stable
+Coca_Cola,10,0, 30,5,Stable
+Orange_Faxe_Kondi,10,0,30,5,Stable
+Royal_Classic,10,0,30,5,Stable
+Royal_Export,10,0,30,5,Stable
+Ceres,10,0,30,5,Stable
+Tuborg_Classic,10,0,30,5,Stable
+Harboe,10,0,30,5,Stable
+Daura(Gluten_free),10,0,30,5,Stable
+Special_beers,15,0,35,10, Stable
+Muesli_bar,10,0,25,5,Stable
+Pop_corn,10,0,25,5,Stable
+Kitkat,10,0,25,5,Stable
+
+
+
