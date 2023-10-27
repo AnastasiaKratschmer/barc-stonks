@@ -17,31 +17,45 @@ export interface Drink {
 	accumulator: number;
 }
 
-const CHANGE_TENDENCY_SECONDS = 2;
+const CHANGE_TENDENCY_SECONDS = 180;
 const CHANCES_OF_CHANGING_TENDENCY = 0.5;
 
 
 // Format price to look beautiful
 export function formatPrice(price: number) {
-	return price.toFixed(2) + "kr";
+	return price.toFixed(2);
 }
 
 function invisible_hand(drink: Drink) {
 	// 1/10 chance of going from stable to up or down
 	if (drink.tendency === Tendency.Stable && Math.random() < CHANCES_OF_CHANGING_TENDENCY) {
-		drink.tendency = Math.random() < 0.5 ? Tendency.Up : Tendency.Down;
+	  drink.tendency = Math.random() < 0.5 ? Tendency.Up : Tendency.Down;
 	}	
 	// 1/5 chance of going from up or down to stable
 	if (drink.tendency !== Tendency.Stable && Math.random() < 1 / 2) {
-		drink.tendency = Tendency.Stable;
+	  drink.tendency = Tendency.Stable;
 	}
-	// If up, increase the price by a random number between 0.1 and 0.5
-	if (drink.tendency === Tendency.Up) {
-	  drink.price += Math.random() * 0.5;
-	}
-	// If down, decrease the price by a random number between 0.1 and 0.5
-	if (drink.tendency === Tendency.Down) {
-	  drink.price -= Math.random() * 0.5;
+	
+	// Special handling for Harboe drink because we (the invisible hand) love Harboe
+	if (drink.name === 'Harboe') {
+		// Randomly decide whether to increase or decrease the price
+		if (Math.random() < 0.5) {
+		// Increase the price by a random number between 1 and 5
+		drink.price += Math.random() * 5 + 1;
+		} else {
+		// Decrease the price by a random number between 1 and 5
+		drink.price -= Math.random() * 5 + 1;
+		}
+	} else {
+	  // For other drinks, handle the tendencies as before
+	  // If up, increase the price by a random number between 0.1 and 0.5
+	  if (drink.tendency === Tendency.Up) {
+		drink.price += Math.random() * 0.5;
+	  }
+	  // If down, decrease the price by a random number between 0.1 and 0.5
+	  if (drink.tendency === Tendency.Down) {
+		drink.price -= Math.random() * 0.5;
+	  }
 	}
   
 	// Ensure price stays within the bounds of [min, max]
